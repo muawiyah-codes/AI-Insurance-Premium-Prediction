@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura Underwrite - Next-Gen AI Health Insurance Risk & Premium Intelligence</title>
+  <meta name="description" content="State-of-the-art AI Insurance Risk Categorization, Actuarial Premium Estimation, and What-If Health & Financial Savings Simulator.">
+  
+  <!-- Modern Typography from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="top-navbar">
+    <div class="brand-wrapper">
+      <div class="brand-logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>AURA UNDERWRITE</h1>
+        <span class="tagline">Next-Gen Actuarial Risk Intelligence</span>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <div class="badge-live-model">
+        <span class="pulse-dot"></span>
+        <span>RandomForest v2.0 • 300 Trees</span>
+      </div>
+
+      <div class="currency-toggle" id="currency-switcher">
+        <button class="currency-btn active" data-currency="INR">₹ INR</button>
+        <button class="currency-btn" data-currency="USD">$ USD</button>
+      </div>
+
+      <a href="/docs" target="_blank" class="api-link-btn" title="Open Swagger API Documentation">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="16 18 22 12 16 6"/>
+          <polyline points="8 6 2 12 8 18"/>
+        </svg>
+        <span>Swagger API</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Banner & Persona Quick Bar -->
+  <header class="hero-section">
+    <div class="hero-banner-card">
+      <div class="hero-content">
+        <h2>Intelligent Insurance <br><span class="gradient-text">Risk & Premium Platform</span></h2>
+        <p>
+          Powered by a trained 300-tree Balanced Random Forest classifier. Accurately predicts risk tiers, computes dynamic actuarial premium pricing, and simulates long-term health financial ROI.
+        </p>
+        <div class="hero-stats-row">
+          <div class="hero-stat-item">
+            <span class="hero-stat-number">300</span>
+            <span class="hero-stat-label">Ensemble Trees</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-number">&lt; 4ms</span>
+            <span class="hero-stat-label">Inference Latency</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-number">100%</span>
+            <span class="hero-stat-label">Explainable Attributions</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <img src="/static/images/hero.jpg" alt="Aura Underwrite AI Hologram Shield" id="hero-banner-img">
+      </div>
+    </div>
+
+    <!-- Persona Quick Bar -->
+    <div class="persona-quick-bar">
+      <div class="persona-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span>Quick Personas:</span>
+      </div>
+      <div class="persona-chips-container" id="persona-chips">
+        <!-- Dynamically rendered via app.js -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="tabs-navigation-wrapper">
+    <div class="tabs-container">
+      <button class="tab-btn active" data-tab="tab-studio">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <circle cx="12" cy="12" r="6"/>
+          <circle cx="12" cy="12" r="2"/>
+        </svg>
+        <span>Smart Quote Studio</span>
+      </button>
+
+      <button class="tab-btn" data-tab="tab-simulator">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2 12h20"/>
+          <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/>
+          <path d="m12 2 4 4-4 4-4-4 4-4z"/>
+        </svg>
+        <span>What-If Health Simulator</span>
+      </button>
+
+      <button class="tab-btn" data-tab="tab-plans">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect width="18" height="18" x="3" y="3" rx="2"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+        <span>Policy Packages</span>
+      </button>
+
+      <button class="tab-btn" data-tab="tab-batch">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        <span>Batch Underwriter (CSV)</span>
+      </button>
+
+      <button class="tab-btn" data-tab="tab-model">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+          <polyline points="2 17 12 22 22 17"/>
+          <polyline points="2 12 12 17 22 12"/>
+        </svg>
+        <span>AI Explainability & Model Info</span>
+      </button>
+
+      <button class="tab-btn" data-tab="tab-developer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="16 18 22 12 16 6"/>
+          <polyline points="8 6 2 12 8 18"/>
+        </svg>
+        <span>Developer API Hub</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content Views Container -->
+  <main class="app-main-container">
+
+    <!-- ====================================================================
+         VIEW 1: SMART QUOTE STUDIO
+         ==================================================================== -->
+    <section class="view-panel active" id="tab-studio">
+      <div class="studio-grid">
+        
+        <!-- Left Column: Input Form -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+              <span>Applicant Biometrics & Profile</span>
+            </h3>
+            <span class="label-val" id="profile-status-badge">Live Actuary</span>
+          </div>
+
+          <div class="card-body">
+            <form id="quote-form">
+              <!-- Age Slider -->
+              <div class="form-group">
+                <label for="input-age">
+                  <span>Applicant Age</span>
+                  <span class="label-val" id="val-age">30 yrs</span>
+                </label>
+                <input type="range" id="input-age" class="range-slider" min="18" max="85" value="30">
+              </div>
+
+              <!-- Biometrics: Height & Weight (BMI Calculation) -->
+              <div class="form-grid-2col">
+                <div class="form-group">
+                  <label for="input-height">
+                    <span>Height (meters)</span>
+                    <span class="label-val" id="val-height">1.75 m</span>
+                  </label>
+                  <input type="number" id="input-height" class="input-control" step="0.01" min="1.0" max="2.4" value="1.75">
+                </div>
+
+                <div class="form-group">
+                  <label for="input-weight">
+                    <span>Weight (kg)</span>
+                    <span class="label-val" id="val-weight">72 kg</span>
+                  </label>
+                  <input type="number" id="input-weight" class="input-control" step="0.5" min="30" max="180" value="72.0">
+                </div>
+              </div>
+
+              <!-- Live BMI Preview Card -->
+              <div class="bmi-preview-box">
+                <div class="bmi-metric-val">
+                  <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Calculated BMI:</span>
+                  <span class="bmi-large" id="live-bmi">23.5</span>
+                  <span style="font-size: 0.8rem; color: var(--text-dim);">kg/m²</span>
+                </div>
+                <div class="bmi-category-badge" id="live-bmi-badge">Normal Weight</div>
+              </div>
+
+              <!-- Tobacco / Smoker Switch -->
+              <div class="form-group" style="margin-top: 1.2rem;">
+                <div class="toggle-card" id="toggle-smoker-card">
+                  <div class="toggle-info">
+                    <h4>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+                      </svg>
+                      <span>Tobacco / Smoker Status</span>
+                    </h4>
+                    <p id="smoker-status-text">Non-Smoker (Qualifies for preferred discount)</p>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="input-smoker">
+                    <span class="slider-round"></span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Annual Income (LPA) -->
+              <div class="form-group">
+                <label for="input-income">
+                  <span>Annual Income (Lakhs INR / LPA)</span>
+                  <span class="label-val" id="val-income">12.0 LPA</span>
+                </label>
+                <input type="range" id="input-income" class="range-slider" min="1" max="60" step="0.5" value="12">
+              </div>
+
+              <!-- City Input & Auto Tier Badge -->
+              <div class="form-group">
+                <label for="input-city">
+                  <span>Residential City</span>
+                  <span class="label-val" id="city-tier-badge">Tier 1 Metro</span>
+                </label>
+                <input type="text" id="input-city" class="input-control" value="Mumbai" list="city-datalist" placeholder="e.g. Mumbai, Delhi, Bangalore...">
+                <datalist id="city-datalist">
+                  <option value="Mumbai">
+                  <option value="Delhi">
+                  <option value="Bangalore">
+                  <option value="Chennai">
+                  <option value="Hyderabad">
+                  <option value="Pune">
+                  <option value="Kolkata">
+                  <option value="Jaipur">
+                  <option value="Chandigarh">
+                  <option value="Indore">
+                  <option value="Lucknow">
+                  <option value="Ahmedabad">
+                </datalist>
+              </div>
+
+              <!-- Occupation Selector -->
+              <div class="form-group">
+                <label><span>Occupation Profile</span></label>
+                <div class="occupation-selector" id="occupation-selector">
+                  <div class="occupation-option active" data-occupation="salaried">💼 Salaried</div>
+                  <div class="occupation-option" data-occupation="self-employed">🚀 Self-Employed</div>
+                  <div class="occupation-option" data-occupation="student">🎓 Student</div>
+                  <div class="occupation-option" data-occupation="retired">🏖️ Retired</div>
+                  <div class="occupation-option" data-occupation="unemployed">⏳ Other</div>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="button" class="btn-primary-gradient" id="btn-calculate-quote">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+                <span>Calculate AI Premium Quote</span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Right Column: Live Telemetry & Speedometer Results -->
+        <div class="telemetry-column">
+          
+          <!-- Risk Gauge Card -->
+          <div class="glass-card risk-meter-card">
+            <h3 style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">
+              AI Risk Index & Underwriting Rating
+            </h3>
+
+            <!-- Semi-Circular SVG Speedometer Gauge -->
+            <div class="gauge-wrapper">
+              <svg viewBox="0 0 200 120" class="gauge-svg">
+                <!-- Background Arc (Gradient) -->
+                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#1e293b" stroke-width="16" stroke-linecap="round"/>
+                <!-- Colored Arc -->
+                <defs>
+                  <linearGradient id="gauge-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#10b981" />
+                    <stop offset="50%" stop-color="#f59e0b" />
+                    <stop offset="100%" stop-color="#ef4444" />
+                  </linearGradient>
+                </defs>
+                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gauge-grad)" stroke-width="14" stroke-linecap="round" opacity="0.85"/>
+                <!-- Needle -->
+                <line x1="100" y1="100" x2="40" y2="100" stroke="#ffffff" stroke-width="3" stroke-linecap="round" id="gauge-needle-line" class="gauge-needle" />
+                <circle cx="100" cy="100" r="7" fill="#38bdf8" />
+              </svg>
+
+              <div class="gauge-center-stats">
+                <div class="risk-score-display" id="display-risk-score">18.5</div>
+                <div class="risk-score-caption">Risk Score (0 - 100)</div>
+              </div>
+            </div>
+
+            <!-- Risk Tier Pill -->
+            <div>
+              <span class="risk-tier-pill badge-low" id="display-risk-tier">
+                <span class="pulse-dot"></span>
+                <span id="risk-tier-text">Preferred Low Risk</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Dynamic Quote Price Card -->
+          <div class="quote-price-card">
+            <div class="quote-price-header">
+              <h3>Estimated Annual Premium</h3>
+              <span class="confidence-tag" id="confidence-tag">99.2% Confidence</span>
+            </div>
+
+            <div class="main-price-figure">
+              <span class="price-currency" id="currency-symbol">₹</span>
+              <span class="price-number" id="annual-price-num">12,500</span>
+              <span class="price-period">/ year</span>
+            </div>
+            <div class="monthly-equivalent" id="monthly-price-text">Approx. ₹1,042 / month</div>
+
+            <!-- Class Probabilities Breakdown -->
+            <div class="probabilities-box">
+              <div class="prob-item">
+                <div class="prob-labels">
+                  <span>Low Risk Probability</span>
+                  <span id="prob-val-low">91.4%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill fill-low" id="prob-bar-low" style="width: 91.4%;"></div>
+                </div>
+              </div>
+
+              <div class="prob-item">
+                <div class="prob-labels">
+                  <span>Medium Risk Probability</span>
+                  <span id="prob-val-med">7.2%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill fill-medium" id="prob-bar-med" style="width: 7.2%;"></div>
+                </div>
+              </div>
+
+              <div class="prob-item">
+                <div class="prob-labels">
+                  <span>High Risk Probability</span>
+                  <span id="prob-val-high">1.4%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill fill-high" id="prob-bar-high" style="width: 1.4%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Explainable Risk Factors Breakdown -->
+          <div class="glass-card" style="padding: 1.5rem;">
+            <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.8rem;">
+              Key Underwriting Attribution Factors
+            </h4>
+            <div id="risk-factors-container">
+              <!-- Dynamically populated via app.js -->
+            </div>
+          </div>
+
+          <!-- Telemetry Actions -->
+          <div class="telemetry-actions">
+            <button class="btn-secondary" id="btn-jump-simulator">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                <polyline points="17 6 23 6 23 12"/>
+              </svg>
+              <span>Simulate What-If ROI</span>
+            </button>
+            <button class="btn-secondary" id="btn-open-certificate">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9V2h12v7"/>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                <rect width="12" height="8" x="6" y="14"/>
+              </svg>
+              <span>Print Official Quote</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 2: WHAT-IF HEALTH & SAVINGS SIMULATOR
+         ==================================================================== -->
+    <section class="view-panel" id="tab-simulator">
+      <div class="simulator-header">
+        <h2>What-If Health & Financial Savings Simulator</h2>
+        <p>
+          Discover how proactive lifestyle choices (smoking cessation & achieving healthy BMI) dynamically reduce your actuarial insurance risk and unlock massive cumulative savings.
+        </p>
+      </div>
+
+      <div class="simulator-dashboard">
+        <!-- Left: Interactive Counterfactual Sliders -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="2">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+              <span>Lifestyle Optimization Controls</span>
+            </h3>
+          </div>
+
+          <div class="card-body">
+            <!-- Simulated Smoker Toggle -->
+            <div class="form-group">
+              <div class="toggle-card">
+                <div class="toggle-info">
+                  <h4>Quit Smoking (Tobacco Cessation)</h4>
+                  <p>Eliminate the ~32% model tobacco risk multiplier</p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="sim-smoker-toggle">
+                  <span class="slider-round"></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Simulated BMI Slider -->
+            <div class="form-group" style="margin-top: 1.5rem;">
+              <label for="sim-bmi-slider">
+                <span>Target Body Mass Index (BMI)</span>
+                <span class="label-val" id="sim-val-bmi">22.5 kg/m²</span>
+              </label>
+              <input type="range" id="sim-bmi-slider" class="range-slider" min="18.5" max="36" step="0.5" value="22.5">
+              <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-dim); margin-top: 4px;">
+                <span>Healthy (18.5 - 24.9)</span>
+                <span>Overweight (25 - 29.9)</span>
+                <span>Obese (&gt;30)</span>
+              </div>
+            </div>
+
+            <!-- Action Button -->
+            <button class="btn-primary-gradient" id="btn-run-simulation" style="margin-top: 1.5rem;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="23 4 23 10 17 10"/>
+                <polyline points="1 20 1 14 7 14"/>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+              </svg>
+              <span>Recalculate Savings & ROI</span>
+            </button>
+
+            <!-- Before vs After Cards Row -->
+            <div class="comparison-cards-row">
+              <div class="comp-card baseline">
+                <h4 style="color: var(--accent-rose);">Current Baseline Profile</h4>
+                <div style="font-size: 1.25rem; font-weight: 700; color: #ffffff;" id="sim-base-price">₹45,200 / yr</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;" id="sim-base-score">Risk Score: 88.0</div>
+              </div>
+
+              <div class="comp-card simulated">
+                <h4 style="color: var(--accent-emerald);">Simulated Healthy Profile</h4>
+                <div style="font-size: 1.25rem; font-weight: 700; color: #ffffff;" id="sim-new-price">₹18,500 / yr</div>
+                <div style="font-size: 0.8rem; color: #34d399; margin-top: 4px;" id="sim-new-score">Risk Score: 24.5</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Savings Milestones Dashboard -->
+        <div>
+          <div class="savings-highlight-card">
+            <span class="savings-badge">Annual Underwriting Discount</span>
+            <div class="savings-figure-big" id="sim-annual-savings">₹26,700</div>
+            <div class="savings-subtitle" id="sim-discount-pct">59.1% Total Premium Reduction</div>
+
+            <!-- Timeline Milestones -->
+            <div class="savings-timeline-grid">
+              <div class="timeline-box">
+                <div class="timeline-val" id="sim-1yr-savings">₹26.7K</div>
+                <div class="timeline-label">1-Year Savings</div>
+              </div>
+              <div class="timeline-box">
+                <div class="timeline-val" id="sim-5yr-savings">₹1.33L</div>
+                <div class="timeline-label">5-Year Savings</div>
+              </div>
+              <div class="timeline-box">
+                <div class="timeline-val" id="sim-10yr-savings">₹2.67L</div>
+                <div class="timeline-label">10-Year Savings</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clinical Health Advisory Box -->
+          <div class="glass-card" style="padding: 1.6rem;">
+            <h4 style="font-size: 0.88rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem;">
+              Personalized Underwriting Advisory
+            </h4>
+            <ul id="sim-advisory-list" style="list-style: none; padding-left: 0;">
+              <!-- Populated via app.js -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 3: TIERED POLICY RECOMMENDATIONS
+         ==================================================================== -->
+    <section class="view-panel" id="tab-plans">
+      <div class="plans-header">
+        <h2>Tailored Health Protection Plans</h2>
+        <p>
+          Quotes calculated dynamically in real-time according to your risk classification and age bracket.
+        </p>
+      </div>
+
+      <div class="plans-grid" id="plans-grid-container">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 4: BATCH UNDERWRITING (CSV SUITE)
+         ==================================================================== -->
+    <section class="view-panel" id="tab-batch">
+      <div class="glass-card" style="margin-bottom: 2rem;">
+        <div class="card-header">
+          <h3 class="card-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            <span>Batch Underwriting & Portfolio Risk Engine</span>
+          </h3>
+        </div>
+
+        <div class="card-body">
+          <div class="batch-controls-bar">
+            <div class="batch-actions-left">
+              <button class="btn-primary-gradient" id="btn-load-demo-batch" style="width: auto; margin-top: 0; padding: 0.7rem 1.4rem;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span>Load Sample Applicants (5 Cases)</span>
+              </button>
+
+              <label class="btn-secondary" style="margin-bottom: 0; cursor: pointer;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <span>Upload CSV File</span>
+                <input type="file" id="batch-file-input" accept=".csv" style="display: none;">
+              </label>
+            </div>
+
+            <button class="btn-secondary" id="btn-export-batch-csv">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Export Enriched Results (CSV)</span>
+            </button>
+          </div>
+
+          <!-- Summary Metric Cards -->
+          <div class="batch-summary-cards">
+            <div class="summary-card">
+              <h4>Total Processed</h4>
+              <div class="summary-val" id="batch-total-count">0</div>
+            </div>
+            <div class="summary-card">
+              <h4>Category Distribution</h4>
+              <div class="summary-val" style="font-size: 1.1rem; color: #38bdf8;" id="batch-dist-val">-</div>
+            </div>
+            <div class="summary-card">
+              <h4>Average Portfolio Risk</h4>
+              <div class="summary-val" id="batch-avg-risk">-</div>
+            </div>
+            <div class="summary-card">
+              <h4>Total Projected Premium</h4>
+              <div class="summary-val" id="batch-total-premium">-</div>
+            </div>
+          </div>
+
+          <!-- Data Table -->
+          <div class="data-table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Applicant ID</th>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>BMI</th>
+                  <th>Smoker</th>
+                  <th>Income</th>
+                  <th>City</th>
+                  <th>Predicted Risk Tier</th>
+                  <th>Confidence</th>
+                  <th>Annual Quote</th>
+                </tr>
+              </thead>
+              <tbody id="batch-table-body">
+                <tr>
+                  <td colspan="10" style="text-align: center; color: var(--text-dim); padding: 2rem;">
+                    Click "Load Sample Applicants" or upload a custom CSV file to inspect batch results.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 5: AI ARCHITECTURE & EXPLAINABILITY
+         ==================================================================== -->
+    <section class="view-panel" id="tab-model">
+      <div class="arch-grid">
+        <!-- Left: Feature Importance Breakdown -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-indigo)" stroke-width="2">
+                <line x1="18" y1="20" x2="18" y2="10"/>
+                <line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+              <span>Random Forest Feature Importances</span>
+            </h3>
+          </div>
+          <div class="card-body">
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+              Direct gini feature importances extracted from the 300 trained decision trees. Notice tobacco use and biometric age dictate over 52% of total variance.
+            </p>
+            <div id="feature-importance-bars">
+              <!-- Dynamically populated via app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Technical Architecture & Benchmark -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                <polyline points="2 17 12 22 22 17"/>
+                <polyline points="2 12 12 17 22 12"/>
+              </svg>
+              <span>Model Pipeline Specifications</span>
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="tech-spec-item">
+              <span class="tech-spec-label">Estimator Algorithm</span>
+              <span class="tech-spec-val">RandomForestClassifier (Balanced)</span>
+            </div>
+            <div class="tech-spec-item">
+              <span class="tech-spec-label">Total Decision Trees</span>
+              <span class="tech-spec-val">300 Trees</span>
+            </div>
+            <div class="tech-spec-item">
+              <span class="tech-spec-label">Maximum Tree Depth</span>
+              <span class="tech-spec-val">12 Levels</span>
+            </div>
+            <div class="tech-spec-item">
+              <span class="tech-spec-label">Preprocessing Pipeline</span>
+              <span class="tech-spec-val">ColumnTransformer (OHE + Passthrough)</span>
+            </div>
+            <div class="tech-spec-item">
+              <span class="tech-spec-label">Target Classes</span>
+              <span class="tech-spec-val">['High', 'Low', 'Medium']</span>
+            </div>
+            <div class="tech-spec-item">
+              <span class="tech-spec-label">Model Serialization Size</span>
+              <span class="tech-spec-val">14.0 MB (Joblib Compressed)</span>
+            </div>
+
+            <!-- Live Latency Benchmark -->
+            <div class="benchmark-box">
+              <div>
+                <h4 style="font-size: 0.95rem; font-weight: 700; color: #ffffff;">Real-Time Latency Benchmark</h4>
+                <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">
+                  Test model execution time across 50 iterations
+                </p>
+                <div style="font-family: var(--font-mono); font-size: 1.1rem; color: #38bdf8; margin-top: 6px;" id="benchmark-result-text">
+                  Average: ~2.4ms / prediction
+                </div>
+              </div>
+              <button class="btn-secondary" id="btn-run-benchmark" style="width: auto;">
+                <span>Test Now</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 6: DEVELOPER API PLAYGROUND
+         ==================================================================== -->
+    <section class="view-panel" id="tab-developer">
+      <div class="glass-card">
+        <div class="card-header">
+          <h3 class="card-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+            <span>Live Developer Integration Code Hub</span>
+          </h3>
+          <a href="/docs" target="_blank" class="api-link-btn">Open Swagger Interactive UI</a>
+        </div>
+        <div class="card-body">
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+            Integrate Aura Underwrite into any broker portal, mobile application, or underwriting CRM using our low-latency JSON REST endpoints.
+          </p>
+
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase;">
+            1. cURL Terminal Request
+          </h4>
+          <pre class="code-box" id="code-curl">curl -X POST "http://localhost:8000/predict" \
+  -H "Content-Type: application/json" \
+  -d '{"age": 30, "weight": 72.0, "height": 1.75, "income_lpa": 12.0, "smoker": false, "city": "Mumbai", "occupation": "salaried"}'</pre>
+
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--accent-indigo); text-transform: uppercase; margin-top: 1.5rem;">
+            2. Python (requests)
+          </h4>
+          <pre class="code-box" id="code-python">import requests
+
+payload = {
+    "age": 30,
+    "weight": 72.0,
+    "height": 1.75,
+    "income_lpa": 12.0,
+    "smoker": False,
+    "city": "Mumbai",
+    "occupation": "salaried"
+}
+
+response = requests.post("http://localhost:8000/predict", json=payload)
+data = response.json()
+print("Predicted Risk Tier:", data["predicted_category"])
+print("Risk Score:", data["risk_score"])
+print("Annual Quote:", data["pricing"]["annual_inr"])</pre>
+
+          <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--accent-emerald); text-transform: uppercase; margin-top: 1.5rem;">
+            3. JavaScript (fetch)
+          </h4>
+          <pre class="code-box" id="code-js">const response = await fetch("http://localhost:8000/predict", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    age: 30,
+    weight: 72.0,
+    height: 1.75,
+    income_lpa: 12.0,
+    smoker: false,
+    city: "Mumbai",
+    occupation: "salaried"
+  })
+});
+const result = await response.json();
+console.log("Risk Tier:", result.predicted_category);</pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       OFFICIAL DIGITAL UNDERWRITING CERTIFICATE MODAL
+       ==================================================================== -->
+  <div class="modal-backdrop" id="certificate-modal">
+    <div class="modal-content">
+      <button class="cert-close-btn" id="btn-close-cert">&times;</button>
+      
+      <div class="certificate-sheet" id="printable-certificate">
+        <div class="cert-header">
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-cyan); letter-spacing: 0.1em; text-transform: uppercase;">
+            AURA UNDERWRITE ACTUARIAL INTELLIGENCE
+          </div>
+          <h3>Official Policy Underwriting Certificate</h3>
+          <div style="font-size: 0.78rem; color: var(--text-dim); margin-top: 4px;" id="cert-timestamp">
+            Date of Assessment: October 2026 • Certificate ID: INS-2026-X89F2
+          </div>
+        </div>
+
+        <div class="cert-meta-grid">
+          <div class="cert-field">
+            <span class="cert-field-label">Applicant Age</span>
+            <span class="cert-field-val" id="cert-age">30 Years</span>
+          </div>
+          <div class="cert-field">
+            <span class="cert-field-label">Biometric BMI</span>
+            <span class="cert-field-val" id="cert-bmi">23.5 kg/m² (Normal)</span>
+          </div>
+          <div class="cert-field">
+            <span class="cert-field-label">Tobacco Consumer Status</span>
+            <span class="cert-field-val" id="cert-smoker">Verified Non-Smoker</span>
+          </div>
+          <div class="cert-field">
+            <span class="cert-field-label">City & Rating Tier</span>
+            <span class="cert-field-val" id="cert-city">Mumbai (Tier 1 Metro)</span>
+          </div>
+          <div class="cert-field">
+            <span class="cert-field-label">Occupation Group</span>
+            <span class="cert-field-val" id="cert-occupation">Salaried Professional</span>
+          </div>
+          <div class="cert-field">
+            <span class="cert-field-label">AI Risk Index</span>
+            <span class="cert-field-val" id="cert-risk-score">18.5 / 100</span>
+          </div>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.3); padding: 1.2rem; border-radius: var(--radius-md); margin: 1.5rem 0; border: 1px solid var(--border-subtle); text-align: center;">
+          <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Official Underwriting Classification</div>
+          <div style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: #34d399; margin: 4px 0;" id="cert-rating-class">
+            PREFERRED LOW RISK TIER
+          </div>
+          <div style="font-size: 0.9rem; color: #ffffff;" id="cert-annual-quote">
+            Guaranteed Base Annual Premium: ₹12,500 / year ($147 USD)
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim);" id="cert-hash">
+              VERIFICATION HASH: 8f9b4c2a0e7193dc58b1
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">
+              Model: Random Forest Ensemble v2.0 • SHA256 Verified
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-family: 'Brush Script MT', cursive, sans-serif; font-size: 1.4rem; color: var(--accent-cyan);">
+              Aura Underwriting AI
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-dim);">Automated Chief Underwriter</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;" class="modal-actions-footer">
+        <button class="btn-secondary" id="btn-cancel-modal">Close</button>
+        <button class="btn-primary-gradient" id="btn-print-certificate" style="width: auto; margin-top: 0; padding: 0.7rem 1.5rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"/>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+            <rect width="12" height="8" x="6" y="14"/>
+          </svg>
+          <span>Print / Save as PDF</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Application Script -->
+  <script src="/static/app.js"></script>
+</body>
+</html>
